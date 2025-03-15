@@ -1,0 +1,72 @@
+package number_guessing_project;
+import javax.swing.JOptionPane;
+import java.util.Random;
+
+public class NumberGuessGame {
+
+	
+	public static void guessing()
+	{
+		  Random random = new Random();
+	        final int maximumNoOfattempts = 5;
+	        final int pointsAssignedperAttempt = 10;
+	        int finalScore = 0;
+	        boolean LikeTOplayAgain = true;
+	    
+
+	        while (LikeTOplayAgain) {
+	            int theNoToBeGuess = random.nextInt(100) + 1;
+	            int attempts = 0;
+	            boolean hasWin = false;
+
+	            JOptionPane.showMessageDialog(null, " please Welcome to Number Guessing Game!\n" +
+	                    "You have " + maximumNoOfattempts + " attempts you have to guess a number between 1 to 100.");
+
+	            while (attempts < maximumNoOfattempts && !hasWin) {
+	                String input = JOptionPane.showInputDialog("Attempt " + (attempts + 1) + 
+	                        "/" + maximumNoOfattempts + "\n please Enter your Guess:");
+	                
+	                try {
+	                    int gues = Integer.parseInt(input);
+	                    attempts++;
+
+	                    if (gues == theNoToBeGuess) {
+	                        hasWin = true;
+	                    } else if (gues < theNoToBeGuess) {
+	                        JOptionPane.showMessageDialog(null, "The number you entered is Too low! please Re Enter.");
+	                    } else {
+	                        JOptionPane.showMessageDialog(null, "The number you entered is Too high! please Re Enter.");
+	                    }
+	                } catch (NumberFormatException e) {
+	                    JOptionPane.showMessageDialog(null, "Invalid input!you have entered Please enter a number.");
+	                }
+	            }
+
+	            if (hasWin) {
+	                int Score = (maximumNoOfattempts - attempts + 1) * pointsAssignedperAttempt;
+	                finalScore += Score;
+	                JOptionPane.showMessageDialog(null, " Wooh! Congratulations! You guessed  in " + attempts + 
+	                        " attempts.\nRound score: " + Score + 
+	                        "\nTotal score: " + finalScore);
+	            } else {
+	                JOptionPane.showMessageDialog(null, "The Game is over! number was " + theNoToBeGuess + 
+	                        "\nTotal score: " + finalScore);
+	            }
+
+	            int choice = JOptionPane.showConfirmDialog(null, "Would you like to play again?", 
+	                    "Play Again?", JOptionPane.YES_NO_OPTION);
+	            LikeTOplayAgain = (choice == JOptionPane.YES_OPTION);
+	        }
+	        
+	        JOptionPane.showMessageDialog(null, "!Thank you  for playing!\nYour final score is : " + finalScore);
+	    }
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+		guessing();
+	  
+		}
+	
+}
